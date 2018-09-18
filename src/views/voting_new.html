@@ -1,12 +1,23 @@
 <section>
     <form action="/api/v1/voting" method="post" content="application/json">
-        <input name="question" type="text" placeholder="Question for your vote"/>
+        <label for="exampleFormControlInput1">Please insert your question for your voting!</label>
+        <input name="question" type="text" class="form-control" id="exampleFormControlInput1"
+               placeholder="Enter question for your vote"><br/>
+
+
         <fieldset>
-            <ul>
-                <li><input name="option_00" type="text" placeholder="Option 01"></li>
-            </ul>
-            <button type="button">[+]</button>
+                <label for="input1">Answer 1</label>
+                <input name="option_00" id=input1 type="text" size="100" placeholder="enter answer option here"><br/>
+                <label for="input2">Answer 2</label>
+                <input name="option_01" id=input2 type="text" size="100" placeholder="enter answer option here"><br/>
+                <label for="input3">Answer 3</label>
+                <input name="option_02" id=input3 type="text" size="100" placeholder="enter answer option here"><br/>
+            <p>
+                <button type="button" class="btn btn-info">Add</button>
+            </p>
         </fieldset>
-        <button type="submit">Submit</button>
+        <p>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </p>
     </form>
 </section>
