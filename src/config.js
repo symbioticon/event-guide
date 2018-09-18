@@ -3,7 +3,7 @@
  */
 
 // Include the handlebars templating library
-var handlebars = require('express3-handlebars'),
+var handlebars = require('express-handlebars'),
   express = require('express');
 
 // Require()-ing this module will return a function
