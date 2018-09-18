@@ -17,10 +17,12 @@ VotingService = function () {
     return voting;
   };
   this.retrieve = function(id) {
+    console.log(id);
+    console.log(this.votes[id]);
     return this.votes[id];
   };
   this.vote = function(voteId, optionId){
-    
+
   };
 };
 

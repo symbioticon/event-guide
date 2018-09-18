@@ -25,11 +25,11 @@ module.exports = function (app) {
   });
 
   app.get('/voting/:id/vote', function (req, res) {
-    var voting = votingService.retrieve(req.id);
+    var voting = votingService.retrieve(req.params.id);
     if (voting) {
       res.render('voting_vote', {voting: voting});
     } else {
-      res.status(404);
+      res.status(404).end();
     }
   });
 
@@ -37,7 +37,12 @@ module.exports = function (app) {
     res.render('voting_view', {});
   });
 
-  app.get('/voting/:uuid', function (req, res) {
-    res.render('voting_view', {});
+  app.get('/voting/:id', function (req, res) {
+    var voting = votingService.retrieve(req.params.id);
+    if (voting) {
+      res.render('voting_vote', {voting: voting});
+    } else {
+      res.status(404).end();
+    }
   });
 };
