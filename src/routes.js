@@ -34,7 +34,7 @@ module.exports = function (app) {
     if (!result) {
       res.redirect('/voting/' + votingId + '/view');
     } else {
-      res.render('')
+      res.render('/voting/' + votingId + '/vote', {errors: result});
     }
   });
 
