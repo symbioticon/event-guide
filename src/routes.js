@@ -8,19 +8,34 @@ module.exports = function (app) {
     res.render('voting_new', {});
   });
 
-  app.post('/api/v1/voting', function (req, res) {
+  var handleOptions = function(reqBody) {
+    var options = [];
+    Object.keys(reqBody).forEach(function(key){
+      if(key.startsWith('option_')){
+        options.push(reqBody[key]);
+      }
+    });
+    return options;
+  };
+
+  app.post('/voting/new', function (req, res) {
+    console.log(req.body);
     var question = req.body.question,
-      options = req.body.options,
+      options = handleOptions(req.body),
       singleVote = req.body.singleVote;
     var voting = votingService.create(question, options, singleVote);
     res.redirect('/voting/' + voting.id);
   });
 
-  app.post('/api/v1/voting/:votingId', function (req, res) {
+  app.post('/voting/:votingId', function (req, res) {
     var votingId = req.params.votingId,
       optionIds = req.body.optionIds;
     var result = votingService.vote(votingId, optionIds);
-    res.redirect('/voting/' + votingId + '/view');
+    if (!result) {
+      res.redirect('/voting/' + votingId + '/view');
+    } else {
+      res.render('')
+    }
   });
 
   app.get('/voting/:id/vote', function (req, res) {
@@ -32,7 +47,7 @@ module.exports = function (app) {
     }
   });
 
-  app.get('/voting/:uuid/view', function (req, res) {
+  app.get('/voting/:id/view', function (req, res) {
     var voting = votingService.retrieve(req.params.id);
     if (voting) {
       res.render('voting_view', {voting: voting});
