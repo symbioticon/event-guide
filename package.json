@@ -1,0 +1,37 @@
+{
+  "name": "svotify",
+  "version": "1.0.0",
+  "description": "S-Hub Voting engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/symbioticon/event-guide.git"
+  },
+  "keywords": [
+    "vote",
+    "s-hub"
+  ],
+  "author": {
+    "name": "Swen Jung",
+    "email": "sju@starfinanz.de"
+  },
+  "contributors": [
+    {
+      "name": "Jan-Marc Ehrmann",
+      "email": "jme@starfinanz.de>"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/symbioticon/event-guide/issues"
+  },
+  "homepage": "https://github.com/symbioticon/event-guide#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express3-handlebars": "^0.5.2",
+    "nedb": "^1.8.0"
+  }
+}
