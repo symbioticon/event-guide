@@ -1,5 +1,6 @@
 const Voting = require('../entity/voting'),
   VotingOption = require('../entity/votingOption'),
+  Vote = require('../entity/vote'),
   uuidv1 = require('uuid/v1')
 ;
 
@@ -17,12 +18,17 @@ VotingService = function () {
     return voting;
   };
   this.retrieve = function(id) {
-    console.log(id);
-    console.log(this.votes[id]);
     return this.votes[id];
   };
   this.vote = function(voteId, optionId){
-
+    var voting = this.votes[voteId];
+    if (voting) {
+      var option = voting.options[optionId];
+      if(option){
+        var vote = new Vote();
+        option.addVote(vote);
+      }
+    }
   };
 };
 
