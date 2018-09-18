@@ -1,1 +1,24 @@
+
+
 {{voting.question}}
+
+
+{{#each errors}}
+    <div class="error">{{this}}</div>
+{{/each}}
+
+<form action="" method="post" content="application/json">
+    <fieldset>
+
+    {{#each voting.options}}
+    <div class="form-check">
+        <input class="form-check-input" name="voteOption_{{this.id}}" type="checkbox">
+        <label class="form-check-label" for="voteOption_{{this.id}}">{{this.text}}</label>
+    </div>
+    {{/each}}
+
+</fieldset>
+    <p>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </p>
+</form>

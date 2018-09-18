@@ -1,0 +1,47 @@
+<canvas id="myChart">
+
+
+
+</canvas>
+
+
+{{voting.question}}
+{{#each voting.options}}
+{{this.text}}:{{this.votes.length}}
+{{/each}}
+
+<script>
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    var data =[
+        {{#each voting.options}}
+        {{this.votes.length}},
+        {{/each}}
+        ];
+
+
+    var label =[
+        {{#each voting.options}}
+        '{{this.text}}',
+        {{/each}}
+        ];
+
+
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'pie',
+
+        // The data for our dataset
+        data: {
+            labels: label,
+            datasets: [{
+                label: '{{voting.question}}',
+                data: data,
+            }],
+
+        },
+
+    });
+
+</script>

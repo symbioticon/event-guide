@@ -20,15 +20,25 @@ VotingService = function () {
   this.retrieve = function(id) {
     return this.votes[id];
   };
-  this.vote = function(voteId, optionId){
+  this.vote = function(voteId, optionIds){
     var voting = this.votes[voteId];
     if (voting) {
-      var option = voting.options[optionId];
-      if(option){
-        var vote = new Vote();
-        option.addVote(vote);
-      }
+      var errors = [];
+      optionIds.forEach(function(optionId){
+          var option = voting.options[optionId];
+          if(option){
+              var vote = new Vote();
+              option.addVote(vote);
+              voting.voteCount++;
+          }  else {
+            errors.push('voteId could not be found: ' + optionId);
+          }
+      });
+      return errors.length > 0 ? errors : undefined;
+    } else {
+      return ['voting could not be found'];
     }
+    return;
   };
 };
 

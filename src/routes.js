@@ -24,17 +24,29 @@ module.exports = function (app) {
       options = handleOptions(req.body),
       singleVote = req.body.singleVote;
     var voting = votingService.create(question, options, singleVote);
-    res.redirect('/voting/' + voting.id);
+    res.redirect('/voting/' + voting.id + '/vote');
   });
 
-  app.post('/voting/:votingId', function (req, res) {
+  var handleVoteOptions = function(reqBody) {
+    console.log(reqBody);
+    var options = [];
+    Object.keys(reqBody).forEach(function(key){
+      if (key.startsWith('voteOption_')){
+        options.push(key.replace('voteOption_', ''));
+      }
+    });
+    console.log(options);
+    return options;
+  };
+
+  app.post('/voting/:votingId/vote', function (req, res) {
     var votingId = req.params.votingId,
-      optionIds = req.body.optionIds;
+      optionIds = handleVoteOptions(req.body);
     var result = votingService.vote(votingId, optionIds);
     if (!result) {
       res.redirect('/voting/' + votingId + '/view');
     } else {
-      res.render('/voting/' + votingId + '/vote', {errors: result});
+      res.render('voting_vote', {errors: result});
     }
   });
 
