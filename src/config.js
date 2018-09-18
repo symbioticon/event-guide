@@ -12,6 +12,11 @@ var handlebars = require('express-handlebars'),
 
 module.exports = function(app){
 
+  app.use(function(req, res, next){
+    console.log('Request:', req.method, req.url);
+    next();
+  });
+
   // Register and configure the handlebars templating engine
   app.engine('html', handlebars({
     defaultLayout: 'main',

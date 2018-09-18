@@ -6,6 +6,19 @@ module.exports = function(app){
   });
 
   app.post('/api/v1/voting', function(req, res){
-    res.status(200);
+    var uuid = '12314124515125125125125';
+    res.redirect('/voting/'+uuid);
+  });
+
+  app.get('/voting/:uuid/vote', function(req, res){
+    res.render('voting_vote', {});
+  });
+
+  app.get('/voting/:uuid/view', function(req, res){
+    res.render('voting_view', {});
+  });
+
+  app.get('/voting/:uuid', function(req, res){
+    res.render('voting_view', {});
   });
 };
